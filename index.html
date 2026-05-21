@@ -18,33 +18,60 @@
 </head>
 
 <body>
-    <!-- Animated Tech Background Elements -->
-    <div class="cyber-grid"></div>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+    <!-- Futuristic AI Background -->
+    <div class="ai-bg" aria-hidden="true">
+        <div class="ai-aurora ai-aurora-1"></div>
+        <div class="ai-aurora ai-aurora-2"></div>
+        <div class="ai-aurora ai-aurora-3"></div>
+        <div class="ai-hex-field"></div>
+        <div class="cyber-grid"></div>
+        <div class="ai-perspective-grid"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="ai-nucleus">
+            <div class="nucleus-core"></div>
+            <div class="nucleus-ring ring-1"></div>
+            <div class="nucleus-ring ring-2"></div>
+            <div class="nucleus-ring ring-3"></div>
+        </div>
+        <canvas id="ai-stream-canvas"></canvas>
+    </div>
 
-    <!-- 3D Canvas Background -->
+    <!-- 3D Neural Network Canvas -->
     <canvas id="webgl-canvas"></canvas>
 
+    <div class="ai-vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="section-glow" aria-hidden="true"></div>
+
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
     <div class="cursor"></div>
+    <div class="cursor-trail" aria-hidden="true"></div>
 
     <nav class="navbar">
         <div class="logo">CJ.</div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about" data-section="about">About</a></li>
+            <li><a href="#experience" data-section="experience">Experience</a></li>
+            <li><a href="#projects" data-section="projects">Projects</a></li>
+            <li><a href="#publications" data-section="publications">Publications</a></li>
+            <li><a href="#contact" data-section="contact">Contact</a></li>
         </ul>
+        <div class="nav-indicator" aria-hidden="true"></div>
     </nav>
 
     <main class="content-wrapper">
         <!-- Hero Section -->
-        <section id="hero" class="hero-section">
+        <section id="hero" class="hero-section" data-theme="cyan">
             <div class="hero-content">
-                <p class="subtitle">AI ENGINEER & FULL STACK DEVELOPER</p>
-                <h1 class="glitch-text" data-text="Christo Jestine">Christo Jestine</h1>
+                <p class="subtitle reveal-text">AI ENGINEER & FULL STACK DEVELOPER</p>
+                <h1 class="glitch-text hero-title" data-text="Christo Jestine">
+                    <span class="char-wrap">Christo Jestine</span>
+                </h1>
                 <p class="description">Building scalable applications, integrating AI solutions, and driving innovation
                     through cutting-edge technologies.</p>
                 <div class="hero-cta">
@@ -55,9 +82,10 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="about-section glass-panel">
+        <section id="about" class="about-section glass-panel" data-theme="purple">
             <div class="section-header">
-                <h2>About Me</h2>
+                <span class="section-index">01</span>
+                <h2 class="section-title">About Me</h2>
                 <div class="line"></div>
             </div>
             <div class="about-grid">
@@ -104,12 +132,14 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="experience-section">
+        <section id="experience" class="experience-section" data-theme="cyan">
             <div class="section-header">
-                <h2>Experience</h2>
+                <span class="section-index">02</span>
+                <h2 class="section-title">Experience</h2>
                 <div class="line"></div>
             </div>
             <div class="timeline">
+                <div class="timeline-progress" aria-hidden="true"></div>
 
                 <div class="timeline-item glass-card">
                     <div class="timeline-dot"></div>
@@ -241,9 +271,10 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="projects-section">
+        <section id="projects" class="projects-section" data-theme="purple">
             <div class="section-header">
-                <h2>Featured Projects</h2>
+                <span class="section-index">03</span>
+                <h2 class="section-title">Featured Projects</h2>
                 <div class="line"></div>
             </div>
 
@@ -412,9 +443,10 @@
         </section>
 
         <!-- Publications Section -->
-        <section id="publications" class="publications-section">
+        <section id="publications" class="publications-section" data-theme="cyan">
             <div class="section-header">
-                <h2>Publications</h2>
+                <span class="section-index">04</span>
+                <h2 class="section-title">Publications</h2>
                 <div class="line"></div>
             </div>
 
@@ -431,7 +463,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact-section glass-panel">
+        <section id="contact" class="contact-section glass-panel" data-theme="purple">
             <div class="contact-content">
                 <h2>Let's Build the Future</h2>
                 <p>Open for opportunities, collaborations, or just a chat about AI and tech.</p>
@@ -454,10 +486,12 @@
         </footer>
     </main>
 
-    <!-- Scripts: Three.js and GSAP for animations -->
+    <!-- Scripts: Three.js, Lenis, and GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="Scripts/ai-background.js"></script>
     <script src="Scripts/main.js"></script>
 </body>
 
